@@ -17,12 +17,7 @@ if (command === "concert-this") {
             console.log("Date of the event: " + moment(response.data[0].datetime.slice(0, 10), "YYYY-MM-DD").format("MM/DD/YYYY") + "\n");
         })
         .catch(function (error) {
-            if (error.request) {
-                console.log(error.request);
-            } else {
-                console.log("Error", error.message);
-            }
-            console.log(error.config);
+           console.log(error);
         });
 } else if (command === "spotify-this-song") {
     let song = ""
@@ -42,6 +37,26 @@ if (command === "concert-this") {
             console.log(err);
         });
 } else if (command === "movie-this") {
+    let movie = ""
+    if (process.argv.length === 3) {
+        movie = "Mr.Nobody"
+    } else {
+        movie = process.argv[3];
+    }
+    axios.get("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy")
+        .then(function (response) {
+            console.log("\nMovie Title: " + response.data.Title);
+            console.log("Year of Release: " + response.data.Year);
+            console.log("IMDB Rating : " + response.data.Ratings[0].Value);
+            console.log("Rotten Tomatoes Rating : " + response.data.Ratings[1].Value);
+            console.log("Country of Production : " + response.data.Country);
+            console.log("Language : " + response.data.Language);
+            console.log("Plot : " + response.data.Plot);
+            console.log("Actors : " + response.data.Actors + "\n");
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
 } else if (command === "do-what-it-says") {
 
