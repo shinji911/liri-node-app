@@ -11,7 +11,7 @@ let command = process.argv[2];
 
 function liri(inCom) {
     if (command === "concert-this") {
-        let artist = process.argv[3];
+        let artist = process.argv.slice(3).join(" ");
         axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
             .then(function (response) {
                 console.log("\nName of the venue: " + response.data[0].venue.name);
@@ -26,7 +26,7 @@ function liri(inCom) {
         if (process.argv.length === 3) {
             song = "The-Sign"
         } else {
-            song = process.argv[3];
+            song = process.argv.slice(3).join(" ");
         }
         spotify.search({ type: 'track', query: song, limit: 1 })
             .then(function (response) {
@@ -43,7 +43,7 @@ function liri(inCom) {
         if (process.argv.length === 3) {
             movie = "Mr.Nobody"
         } else {
-            movie = process.argv[3];
+            movie = process.argv.slice(3).join(" ");
         }
         axios.get("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy")
             .then(function (response) {
