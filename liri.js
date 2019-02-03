@@ -10,7 +10,7 @@ let fs = require("fs");
 let command = process.argv[2];
 
 function liri(inCom) {
-    if (command === "concert-this") {
+    if (inCom === "concert-this") {
         let artist = process.argv.slice(3).join(" ");
         axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
             .then(function (response) {
@@ -21,7 +21,7 @@ function liri(inCom) {
             .catch(function (error) {
                 console.log(error);
             });
-    } else if (command === "spotify-this-song") {
+    } else if (inCom === "spotify-this-song") {
         let song = ""
         if (process.argv.length === 3) {
             song = "The-Sign"
@@ -38,7 +38,7 @@ function liri(inCom) {
             .catch(function (err) {
                 console.log(err);
             });
-    } else if (command === "movie-this") {
+    } else if (inCom === "movie-this") {
         let movie = ""
         if (process.argv.length === 3) {
             movie = "Mr.Nobody"
@@ -60,7 +60,7 @@ function liri(inCom) {
                 console.log(error);
             });
 
-    } else if (command === "do-what-it-says") {
+    } else if (inCom === "do-what-it-says") {
         fs.readFile("random.txt", "utf8", function (error, data) {
             if (error) {
                 return console.log(error);
